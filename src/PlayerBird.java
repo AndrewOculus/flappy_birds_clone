@@ -31,7 +31,7 @@ public class PlayerBird
         birdBody = world.createBody(bodyDef);
 		birdBody.setMassData(md);
 		PolygonShape shape = new PolygonShape();
-        shape.setAsBox(0.5f, 0.5f);
+        shape.setAsBox(0.25f, 0.25f);
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = 1f;
@@ -75,7 +75,7 @@ public class PlayerBird
 	public void jumpBird()
 	{
 		if(!isDead)
-		birdBody.applyLinearImpulse(new Vector2(0,14f) , birdBody.getPosition(), true);
+		birdBody.applyLinearImpulse(new Vector2(0,2f) , birdBody.getPosition(), true);
 	}
 	public boolean getIsDead()
 	{

@@ -26,17 +26,15 @@ public class WallCallback
 	}
 	public void dispose()
 	{
-		for(int i = 0 ; i < wallArray.size ; i++)
-		{
-			}
+
 	}
 	public void clearWallArray()
 	{
 		for(int i = 0 ; i < wallArray.size ; i++)
 		{
 			wallArray.get(i).dispose();
-			
-			wallArray.removeIndex(i);
 		}
+		wallArray.removeRange(0,wallArray.size-1 );
+
 	}
 }

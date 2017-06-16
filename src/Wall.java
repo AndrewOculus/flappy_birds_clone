@@ -8,6 +8,7 @@ public class Wall implements WallCallback.WCallback
 	private RenderKit rkit;
 	private World world;
 	private Body wallBody;
+	private Fixture fixture;
 	
 	public Wall(Vector2 pos , RenderKit rkit)
 	{
@@ -30,8 +31,7 @@ public class Wall implements WallCallback.WCallback
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = 1f;
-        Fixture fixture = wallBody.createFixture(fixtureDef);
-		
+        fixture = wallBody.createFixture(fixtureDef);	
 	}
 	public void update(float dt)
 	{

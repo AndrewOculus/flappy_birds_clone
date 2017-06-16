@@ -33,7 +33,7 @@ public class WorldScene
 	}
 	private void beginPhysics()
 	{
-     //   Wall wall = new Wall(new Vector2(2 , -9f) , rkit);
+		//Wall wall = new Wall(new Vector2(2 , -9f) , rkit);
 		//wallCallback.registerCallback(wall);
 		//wall = new Wall(new Vector2(2 , 9) , rkit);
 		//wallCallback.registerCallback(wall);
@@ -61,8 +61,8 @@ public class WorldScene
 		
 		if(wallTimer<=0&&!bird.getIsDead())
 		{
-			float w = MathUtils.random(7f,9f);
-			float h = MathUtils.random(5.5f,9f);
+			float w = MathUtils.random(9f,11f);
+			float h = MathUtils.random(7.5f,9f);
 			Wall wall = new Wall(new Vector2( w, -h) , rkit);
 			wallCallback.registerCallback(wall);
 			wall = new Wall(new Vector2(w , h) , rkit);
