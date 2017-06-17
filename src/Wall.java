@@ -15,8 +15,9 @@ public class Wall implements WallCallback.WCallback
 	private ShapeRenderer renderer;
 	private OrthographicCamera camera;
 	private boolean isSensor;
+	private WorldScene scene;
 	
-	public Wall(Vector2 pos , RenderKit rkit , boolean isSensor)
+	public Wall(Vector2 pos , RenderKit rkit , boolean isSensor ,WorldScene scene )
 	{
 		this.position = pos;
 		this.rkit = rkit;
@@ -24,6 +25,7 @@ public class Wall implements WallCallback.WCallback
 		this.renderer = rkit.getShapeRenderer();
 		this.camera = rkit.getCamera();
 		this.isSensor = isSensor;
+		this.scene = scene;
 		this.initPhysic();
 	}
 	public void initPhysic()
@@ -40,7 +42,6 @@ public class Wall implements WallCallback.WCallback
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = 1f;
-		fixtureDef.isSensor = isSensor;
 		
         fixture = wallBody.createFixture(fixtureDef);	
 	}
@@ -48,19 +49,21 @@ public class Wall implements WallCallback.WCallback
 	public void update(float dt)
 	{
 		wallBody.setTransform(wallBody.getPosition().x - dt*speed, wallBody.getPosition().y , 0);
+		if(wallBody.getPosition().x < 0 && isSensor)
+		{
+			isSensor = false;
+			scene.addScore();
+		}
 	}
 	@Override
 	public void render(float dt)
 	{
-		if(!isSensor)
-		{
-			renderer.setProjectionMatrix(camera.combined);
-			renderer.setColor(Color.RED);
-			renderer.begin(ShapeRenderer.ShapeType.Filled);
-			renderer.rect(wallBody.getPosition().x - sizeWall , wallBody.getPosition().y - sizeWall*10 , sizeWall*2 , sizeWall*20);
-			renderer.end();
-		}
-		
+		renderer.setProjectionMatrix(camera.combined);
+		renderer.setColor(Color.RED);
+		renderer.begin(ShapeRenderer.ShapeType.Filled);
+		renderer.rect(wallBody.getPosition().x - sizeWall , wallBody.getPosition().y - sizeWall*10 , sizeWall*2 , sizeWall*20);
+		renderer.end();
+	
 	}
 	@Override
 	public void dispose()

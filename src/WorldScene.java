@@ -18,6 +18,8 @@ public class WorldScene
 	private boolean isJump = false;
 	private WallCallback wallCallback;
 	private float wallTimer = 2.5f;
+	private int score;
+	private BitmapFont font;
 	
 	
 	public WorldScene(RenderKit rkit)
@@ -28,6 +30,7 @@ public class WorldScene
 		this.camera = rkit.getCamera();
 		this.renderer = rkit.getShapeRenderer();
 		this.world = rkit.getWorld();
+		this.font = rkit.getFont();
 		this.debugRender = rkit.getDebugRenderer();
 		this.beginPhysics();
 	}
@@ -59,11 +62,9 @@ public class WorldScene
 		{
 			float w = MathUtils.random(9f,11f);
 			float h = MathUtils.random(6.5f,9f);
-			Wall wall = new Wall(new Vector2( w, -h) , rkit , false);
+			Wall wall = new Wall(new Vector2( w, -h) , rkit , true,this);
 			wallCallback.registerCallback(wall);
-			wall = new Wall(new Vector2(w , h) , rkit , false);
-			wallCallback.registerCallback(wall);
-			wall = new Wall(new Vector2(w , 0) , rkit , true);
+			wall = new Wall(new Vector2(w , h) , rkit , false,this);
 			wallCallback.registerCallback(wall);
 			
 			wallTimer = MathUtils.random(2.5f,4.5f);
@@ -74,14 +75,21 @@ public class WorldScene
 		{
 			this.restoreGame();
 		}
+		batch.begin();
+		font.draw(batch , score+"",-5,5);
+		batch.end();
 	}
 	public void restoreGame()
 	{
 		wallCallback.clearWallArray();
 		wallCallback.dispose();
 		bird.deletBird();
-		
-		bird = new PlayerBird(new Vector2(0 , -2) , rkit);
+		score = 0;
+		bird = new PlayerBird(new Vector2(0 , -1) , rkit);
+	}
+	public void addScore()
+	{
+		score++;
 	}
 	public void dispose()
 	{

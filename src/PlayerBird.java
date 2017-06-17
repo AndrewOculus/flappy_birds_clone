@@ -13,6 +13,7 @@ public class PlayerBird
 	private Body birdBody;
 	private boolean isDead;
 	private SpriteBatch batch;
+	private BitmapFont font;
 	private OrthographicCamera camera;
 	private Texture birdTexture;
 	private float birdSize = 0.45f;
@@ -22,6 +23,7 @@ public class PlayerBird
 		this.position = pos;
 		this.rkit = rkit;
 		this.world = rkit.getWorld();
+		this.font = rkit.getFont();
 		this.birdTexture = new Texture(Gdx.files.internal("wheel.png"));
 		this.batch = rkit.getSpriteBatch();
 		this.camera = rkit.getCamera();
@@ -74,9 +76,9 @@ public class PlayerBird
 	{
 		if(isDead)
 		{
-			rkit.getSpriteBatch().begin();
-			rkit.getFont().draw(rkit.getSpriteBatch() , "Wasted" , -1.5f,0);
-			rkit.getSpriteBatch().end();
+			batch.begin();
+			font.draw(batch , "wasted" , -1.5f,0);
+			batch.end();
 		}
 		if(birdBody.getPosition().y>10||birdBody.getPosition().y<-10)
 		{
