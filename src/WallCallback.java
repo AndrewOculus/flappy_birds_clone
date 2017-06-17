@@ -3,10 +3,11 @@ import com.badlogic.gdx.utils.*;
 
 public class WallCallback
 {
-	Array<WCallback> wallArray;
+	private Array<WCallback> wallArray;
 	
 	interface WCallback{
 		public void update(float dt);
+		public void render(float dt);
 		public void dispose();
 	}
 	public WallCallback()
@@ -24,9 +25,12 @@ public class WallCallback
 			wallArray.get(i).update(dt);
 		}
 	}
-	public void dispose()
+	public void render(float dt)
 	{
-
+		for(int i = 0 ; i < wallArray.size ; i++)
+		{
+			wallArray.get(i).render(dt);
+		}
 	}
 	public void clearWallArray()
 	{
@@ -34,7 +38,13 @@ public class WallCallback
 		{
 			wallArray.get(i).dispose();
 		}
-		wallArray.removeRange(0,wallArray.size-1 );
-
+		wallArray = new Array<WCallback>();
+	}
+	public void dispose()
+	{
+		for(int i = 0 ; i < wallArray.size ; i++)
+		{
+			wallArray.get(i).dispose();
+		}
 	}
 }

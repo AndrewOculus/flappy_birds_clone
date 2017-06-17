@@ -22,6 +22,7 @@ public class RenderKit
 		this.debugRenderer = debugRenderer;
 		this.font = font;
 		this.font.setColor(0,0,0,1);
+		this.font.setScale(0.1f);
 	}
 	public SpriteBatch getSpriteBatch(){return batch;}
 	public ShapeRenderer getShapeRenderer(){return renderer;}

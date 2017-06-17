@@ -35,7 +35,6 @@ public class MyGdxGame implements ApplicationListener
 		world = new World(new Vector2(0 , -9.81f) , false);
 		rkit = new RenderKit(renderer , batch , camera , world , debugRender ,font);
 		scene = new WorldScene(rkit);
-		
 	}
 
 	@Override
@@ -46,7 +45,6 @@ public class MyGdxGame implements ApplicationListener
 		float dt = Gdx.graphics.getDeltaTime();
 		scene.update(dt);
 		world.step(dt,2,6);
-	
 	}
 
 	@Override

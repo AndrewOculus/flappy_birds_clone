@@ -33,11 +33,6 @@ public class WorldScene
 	}
 	private void beginPhysics()
 	{
-		//Wall wall = new Wall(new Vector2(2 , -9f) , rkit);
-		//wallCallback.registerCallback(wall);
-		//wall = new Wall(new Vector2(2 , 9) , rkit);
-		//wallCallback.registerCallback(wall);
-		
 		bird = new PlayerBird(new Vector2(0 , -2) , rkit);
 	}
 	public void update(float dt)
@@ -56,21 +51,24 @@ public class WorldScene
 		if(!bird.getIsDead())
 			wallCallback.update(dt);
 		
+		wallCallback.render(dt);
 		//add dynamic walls
 		wallTimer -= dt;
 		
 		if(wallTimer<=0&&!bird.getIsDead())
 		{
 			float w = MathUtils.random(9f,11f);
-			float h = MathUtils.random(7.5f,9f);
-			Wall wall = new Wall(new Vector2( w, -h) , rkit);
+			float h = MathUtils.random(6.5f,9f);
+			Wall wall = new Wall(new Vector2( w, -h) , rkit , false);
 			wallCallback.registerCallback(wall);
-			wall = new Wall(new Vector2(w , h) , rkit);
+			wall = new Wall(new Vector2(w , h) , rkit , false);
 			wallCallback.registerCallback(wall);
-			wallTimer = MathUtils.random(4f,6f);
+			wall = new Wall(new Vector2(w , 0) , rkit , true);
+			wallCallback.registerCallback(wall);
+			
+			wallTimer = MathUtils.random(2.5f,4.5f);
 		}
 		bird.update(dt);
-		
 		
 		if(bird.getIsDead()&&Gdx.input.isTouched())
 		{
