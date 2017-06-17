@@ -74,12 +74,6 @@ public class PlayerBird
 	}
 	public void update(float dt)
 	{
-		if(isDead)
-		{
-			batch.begin();
-			font.draw(batch , "wasted" , -1.5f,0);
-			batch.end();
-		}
 		if(birdBody.getPosition().y>10||birdBody.getPosition().y<-10)
 		{
 			isDead = true;

@@ -26,7 +26,7 @@ public class WorldScene
 	{
 		this.wallCallback = new WallCallback();
 		this.rkit = rkit;
-		this.batch = rkit.getSpriteBatch();
+		this.batch = new SpriteBatch();
 		this.camera = rkit.getCamera();
 		this.renderer = rkit.getShapeRenderer();
 		this.world = rkit.getWorld();
@@ -75,8 +75,17 @@ public class WorldScene
 		{
 			this.restoreGame();
 		}
+		if(bird.getIsDead())
+		{
+			batch.begin();
+			font.setScale(10);
+			font.draw(batch , "wasted" , Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
+			batch.end();
+		}
+		//batch.setProjectionMatrix(rkit.getStandartMatrix());
 		batch.begin();
-		font.draw(batch , score+"",-5,5);
+		font.setScale(10);
+		font.draw(batch , score+"",50,Gdx.graphics.getHeight()- 50);
 		batch.end();
 	}
 	public void restoreGame()

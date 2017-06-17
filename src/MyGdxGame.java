@@ -9,15 +9,15 @@ import com.badlogic.gdx.math.*;
 
 public class MyGdxGame implements ApplicationListener
 {
-	SpriteBatch batch;
-	ShapeRenderer renderer;
-	OrthographicCamera camera;
-	RenderKit rkit;
-	WorldScene scene;
-	World world;
-	Box2DDebugRenderer debugRender;
-	int w , h;
-	BitmapFont font;
+	private SpriteBatch batch;
+	private ShapeRenderer renderer;
+	private OrthographicCamera camera;
+	private RenderKit rkit;
+	private WorldScene scene;
+	private World world;
+	private Box2DDebugRenderer debugRender;
+	private int w , h;
+	private BitmapFont font;
 
 	@Override
 	public void create()

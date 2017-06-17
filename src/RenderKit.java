@@ -3,6 +3,8 @@ import com.badlogic.gdx.graphics.glutils.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.physics.box2d.*;
+import android.renderscript.*;
+import com.badlogic.gdx.math.*;
 
 public class RenderKit
 {
@@ -12,10 +14,12 @@ public class RenderKit
 	private World world;
 	private Box2DDebugRenderer debugRenderer;
 	private BitmapFont font;
+	private Matrix4 standartMatrix;
 	
 	public RenderKit(ShapeRenderer sr , SpriteBatch bch , OrthographicCamera cam , World world ,Box2DDebugRenderer debugRenderer,BitmapFont font )
 	{
 		this.batch = bch;
+		standartMatrix = bch.getProjectionMatrix();
 		this.camera = cam;
 		this.renderer = sr;
 		this.world = world;
@@ -30,4 +34,5 @@ public class RenderKit
 	public World getWorld(){return world;}
 	public Box2DDebugRenderer getDebugRenderer(){return debugRenderer;}
 	public BitmapFont getFont(){return font;}
+	public Matrix4 getStandartMatrix(){return standartMatrix;}
 }
