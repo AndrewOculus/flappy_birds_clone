@@ -42,7 +42,8 @@ public class WorldScene
 	public void update(float dt)
 	{
 		
-		
+		envrmtal.update(dt);
+		envrmtal.setIsStoppet(bird.getIsDead());
 		//debugRender.render(world , camera.combined);
 		if(Gdx.input.isTouched()&&isJump)
 		{
@@ -72,7 +73,7 @@ public class WorldScene
 			
 			wallTimer = MathUtils.random(2.5f,4.5f);
 		}
-		//envrmtal.update(dt);
+		
 		bird.update(dt);
 		
 		if(bird.getIsDead()&&Gdx.input.isTouched())
@@ -82,8 +83,8 @@ public class WorldScene
 		if(bird.getIsDead())
 		{
 			batch.begin();
-			font.setScale(8);
-			font.draw(batch , "wasted" , Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
+			font.setScale(15);
+			font.draw(batch , "wasted" , Gdx.graphics.getWidth()/2 - 240,Gdx.graphics.getHeight()/2);
 			batch.end();
 		}
 		//batch.setProjectionMatrix(rkit.getStandartMatrix());

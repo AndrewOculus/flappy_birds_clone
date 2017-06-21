@@ -79,18 +79,13 @@ public class PlayerBird
 	}
 	public void update(float dt)
 	{
-		//Particle p = new Particle(birdBody.getPosition() , rotation/150f , rkit);
-		//pcallback.registerCallback(p);
-		//pcallback.update(dt);
-		//pcallback.setIsStopped(isDead);
-		
+
 		if(birdBody.getPosition().y>10||birdBody.getPosition().y<-10)
 		{
 			isDead = true;
 		}
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		//batch.draw(birdTexture , birdBody.getPosition().x - birdSize, birdBody.getPosition().y - birdSize, birdSize*2,birdSize*2);
 		rotation = birdBody.getLinearVelocity().y*5f;
 		batch.draw(birdTexRegion , birdBody.getPosition().x - birdSize, 
 		birdBody.getPosition().y - birdSize , 
@@ -100,7 +95,7 @@ public class PlayerBird
 	public void jumpBird()
 	{
 		if(!isDead)
-		birdBody.applyLinearImpulse(new Vector2(0,birdSize*25) , birdBody.getPosition(), true);
+			birdBody.applyLinearImpulse(new Vector2(0,birdSize*25) , birdBody.getPosition(), true);
 	}
 	public boolean getIsDead()
 	{
