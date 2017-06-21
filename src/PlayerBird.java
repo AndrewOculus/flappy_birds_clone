@@ -16,7 +16,10 @@ public class PlayerBird
 	private BitmapFont font;
 	private OrthographicCamera camera;
 	private Texture birdTexture;
+	private TextureRegion birdTexRegion;
 	private float birdSize = 0.45f;
+	private float rotation = 0;
+	private ParticleCallback pcallback;
 	
 	public PlayerBird(Vector2 pos , RenderKit rkit)
 	{
@@ -24,9 +27,11 @@ public class PlayerBird
 		this.rkit = rkit;
 		this.world = rkit.getWorld();
 		this.font = rkit.getFont();
-		this.birdTexture = new Texture(Gdx.files.internal("wheel.png"));
+		this.birdTexture = new Texture(Gdx.files.internal("plain.png"));
+		this.birdTexRegion = new TextureRegion(birdTexture);
 		this.batch = rkit.getSpriteBatch();
 		this.camera = rkit.getCamera();
+		this.pcallback = new ParticleCallback();
 		this.initPhysic();
 	}
 	private void initPhysic()
@@ -74,13 +79,22 @@ public class PlayerBird
 	}
 	public void update(float dt)
 	{
+		//Particle p = new Particle(birdBody.getPosition() , rotation/150f , rkit);
+		//pcallback.registerCallback(p);
+		//pcallback.update(dt);
+		//pcallback.setIsStopped(isDead);
+		
 		if(birdBody.getPosition().y>10||birdBody.getPosition().y<-10)
 		{
 			isDead = true;
 		}
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		batch.draw(birdTexture , birdBody.getPosition().x - birdSize, birdBody.getPosition().y - birdSize, birdSize*2,birdSize*2);
+		//batch.draw(birdTexture , birdBody.getPosition().x - birdSize, birdBody.getPosition().y - birdSize, birdSize*2,birdSize*2);
+		rotation = birdBody.getLinearVelocity().y*5f;
+		batch.draw(birdTexRegion , birdBody.getPosition().x - birdSize, 
+		birdBody.getPosition().y - birdSize , 
+		birdSize , birdSize , birdSize*2, birdSize*2 , 1.2f , 1.5f,rotation);
 		batch.end();
 	}
 	public void jumpBird()

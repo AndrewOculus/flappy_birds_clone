@@ -59,7 +59,7 @@ public class Wall implements WallCallback.WCallback
 	public void render(float dt)
 	{
 		renderer.setProjectionMatrix(camera.combined);
-		renderer.setColor(Color.RED);
+		renderer.setColor(Color.LIGHT_GRAY);
 		renderer.begin(ShapeRenderer.ShapeType.Filled);
 		renderer.rect(wallBody.getPosition().x - sizeWall , wallBody.getPosition().y - sizeWall*10 , sizeWall*2 , sizeWall*20);
 		renderer.end();

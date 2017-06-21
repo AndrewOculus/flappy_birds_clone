@@ -20,7 +20,7 @@ public class WorldScene
 	private float wallTimer = 2.5f;
 	private int score;
 	private BitmapFont font;
-	
+	private Environmental envrmtal;
 	
 	public WorldScene(RenderKit rkit)
 	{
@@ -33,6 +33,7 @@ public class WorldScene
 		this.font = rkit.getFont();
 		this.debugRender = rkit.getDebugRenderer();
 		this.beginPhysics();
+		this.envrmtal = new Environmental(rkit);
 	}
 	private void beginPhysics()
 	{
@@ -40,7 +41,9 @@ public class WorldScene
 	}
 	public void update(float dt)
 	{
-		debugRender.render(world , camera.combined);
+		
+		
+		//debugRender.render(world , camera.combined);
 		if(Gdx.input.isTouched()&&isJump)
 		{
 			bird.jumpBird();
@@ -69,6 +72,7 @@ public class WorldScene
 			
 			wallTimer = MathUtils.random(2.5f,4.5f);
 		}
+		//envrmtal.update(dt);
 		bird.update(dt);
 		
 		if(bird.getIsDead()&&Gdx.input.isTouched())
@@ -78,14 +82,15 @@ public class WorldScene
 		if(bird.getIsDead())
 		{
 			batch.begin();
-			font.setScale(10);
+			font.setScale(8);
 			font.draw(batch , "wasted" , Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
 			batch.end();
 		}
 		//batch.setProjectionMatrix(rkit.getStandartMatrix());
+		
 		batch.begin();
-		font.setScale(10);
-		font.draw(batch , score+"",50,Gdx.graphics.getHeight()- 50);
+		font.setScale(7);
+		font.draw(batch ,"Your Score: "+ score,50,Gdx.graphics.getHeight()- 50);
 		batch.end();
 	}
 	public void restoreGame()
@@ -102,7 +107,7 @@ public class WorldScene
 	}
 	public void dispose()
 	{
-		
+		envrmtal.dispose();
 	}
 	
 }
